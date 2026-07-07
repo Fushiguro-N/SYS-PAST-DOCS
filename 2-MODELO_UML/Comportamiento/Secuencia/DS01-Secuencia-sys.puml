@@ -1,0 +1,63 @@
+@startuml
+title Diagrama de Secuencia - Registro de Pasantía (Escuela Administración)
+
+actor "estudiante: Estudiante" as E
+participant "sistema: SistemaPasantia" as SP
+participant "solicitud: Expediente" as X
+participant "empresa: Empresa" as EM
+participant "docente: Coordinador" as C
+participant "notif: Notificacion" as N
+participant "log: Auditoria" as A
+
+activate E
+E -> SP : iniciarRegistro(idEstudiante)
+activate SP
+SP -> X : <<create>> (idExpediente, fecha)
+activate X
+X --> SP : instancia creada
+deactivate X
+SP --> E : solicitud abierta
+deactivate SP
+
+loop Por cada requisito documental
+    E -> SP : subirDocumento(tipo, archivo)
+    activate SP
+    SP -> X : validarFormato(archivo)
+    X --> SP : estado = OK
+    SP -> X : guardarDocumento(archivo)
+    deactivate SP
+end
+
+E -> SP : seleccionarEmpresa(idEmpresa)
+activate SP
+SP -> EM : verificarDisponibilidad()
+activate EM
+EM --> SP : cupoDisponible = true
+deactivate EM
+SP -> X : asignarEmpresa(empresa)
+deactivate SP
+
+E -> C : enviarSolicitudParaRevision()
+activate C
+C -> X : revisarExpediente()
+activate X
+X -> X : validarRequisitos()
+X --> C : expedieteCompleto = true
+deactivate X
+C -> SP : aprobarSolicitud()
+activate SP
+SP -> N : enviarConfirmacion(estudiante)
+SP -> X : estado = APROBADO
+deactivate SP
+C --> E : solicitud aprobada
+deactivate C
+
+note over E, A : <<include>> Registro de Auditoría
+E -> A : <<create>> (fechaHora, "Registro Pasantía", "PROCESOS_ADMIN", ...)
+activate A
+A -> A : registrarEvento()
+A --> E : traza guardada
+deactivate A
+
+deactivate E
+@enduml

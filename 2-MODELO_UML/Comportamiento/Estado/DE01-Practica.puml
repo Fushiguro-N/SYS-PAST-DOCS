@@ -1,0 +1,40 @@
+@startuml
+skinparam style strictuml
+
+title Diagrama de Estados: Proceso de Pasantía
+
+[*] --> REGISTRO_SOLICITUD
+
+state REGISTRO_SOLICITUD {
+    [*] --> DatosPersonales
+    DatosPersonales --> SeleccionEmpresa : validarDisponibilidad()
+}
+
+REGISTRO_SOLICITUD --> REVISION_ACADEMICA : enviarDocumentacion()
+
+state REVISION_ACADEMICA <<choice>>
+REVISION_ACADEMICA --> APROBADO : [expediente correcto]
+REVISION_ACADEMICA --> REGISTRO_SOLICITUD : [documentos incompletos]
+
+APROBADO --> EN_CURSO : inicioPasantia()
+
+state EN_CURSO {
+    [*] --> RegistroAvances
+    RegistroAvances : do / monitorearHoras()
+    RegistroAvances : do / informeParcial()
+}
+
+EN_CURSO --> FINALIZADO : concluirPeriodo()
+EN_CURSO --> ANULADO : retiroVoluntario()
+
+FINALIZADO --> EVALUACION_FINAL : presentarInformeFinal()
+
+state EVALUACION_FINAL <<choice>>
+EVALUACION_FINAL --> APROBADO_TOTAL : [nota aprobatoria]
+EVALUACION_FINAL --> REPROBADO : [nota desaprobatoria]
+
+APROBADO_TOTAL --> [*]
+REPROBADO --> [*]
+ANULADO --> [*]
+
+@enduml

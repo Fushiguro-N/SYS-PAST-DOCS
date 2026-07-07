@@ -1,0 +1,319 @@
+@startjson
+{
+  "CU08": {
+    "Caso de uso": "Registrar empresa",
+    "Id": "CU-08",
+    "Breve descripción": "Permite registrar una nueva empresa u organización aliada en el sistema.",
+    "Actores primarios": ["Administrador"],
+    "Actores secundarios": ["Base de Datos"],
+    "Precondiciones": ["El usuario autenticado debe tener permisos de gestión."],
+    "Flujo principal": {
+      "1": "El administrador selecciona la opción de registrar empresa.",
+      "2": "El sistema solicita los datos de la empresa (RUC, nombre, contacto, dirección).",
+      "3": "El administrador ingresa los datos y confirma el registro.",
+      "4": "El sistema valida los datos y almacena la información."
+    },
+    "Postcondiciones": ["La empresa queda registrada y habilitada en el sistema."]
+  },
+  "CU09": {
+    "Caso de uso": "Actualizar empresa",
+    "Id": "CU-09",
+    "Breve descripción": "Permite modificar los datos de una empresa previamente registrada.",
+    "Actores primarios": ["Administrador"],
+    "Actores secundarios": ["Base de Datos"],
+    "Precondiciones": ["La empresa debe existir en el sistema."],
+    "Flujo principal": {
+      "1": "El administrador busca y selecciona la empresa a modificar.",
+      "2": "El sistema despliega el formulario con los datos actuales.",
+      "3": "El administrador modifica los campos requeridos y guarda los cambios.",
+      "4": "El sistema actualiza la información en la base de datos."
+    },
+    "Postcondiciones": ["Los datos de la empresa son actualizados correctamente."]
+  },
+  "CU10": {
+    "Caso de uso": "Eliminar empresa",
+    "Id": "CU-10",
+    "Breve descripción": "Permite dar de baja o eliminar de forma lógica una empresa del sistema.",
+    "Actores primarios": ["Administrador"],
+    "Actores secundarios": ["Base de Datos"],
+    "Precondiciones": ["La empresa debe estar registrada y no tener convenios vigentes activos."],
+    "Flujo principal": {
+      "1": "El administrador selecciona la empresa a eliminar.",
+      "2": "El sistema solicita confirmación para la eliminación.",
+      "3": "El administrador confirma la acción.",
+      "4": "El sistema inhabilita o elimina el registro de la empresa."
+    },
+    "Postcondiciones": ["La empresa cambia a estado inactivo o es removida del sistema."]
+  },
+  "CU11": {
+    "Caso de uso": "Registrar estudiante",
+    "Id": "CU-11",
+    "Breve descripción": "Permite dar de alta a un estudiante apto para realizar pasantías.",
+    "Actores primarios": ["Administrador"],
+    "Actores secundarios": ["Base de Datos", "Sistema Académico"],
+    "Precondiciones": ["El estudiante debe estar matriculado y cumplir con los requisitos académicos."],
+    "Flujo principal": {
+      "1": "El administrador solicita el registro de un nuevo estudiante.",
+      "2": "El sistema solicita o importa los datos personales y académicos.",
+      "3": "El administrador confirma la inserción.",
+      "4": "El sistema valida y guarda el registro del estudiante."
+    },
+    "Postcondiciones": ["El estudiante queda registrado y habilitado para postular."]
+  },
+  "CU12": {
+    "Caso de uso": "Actualizar estudiante",
+    "Id": "CU-12",
+    "Breve descripción": "Permite modificar la información de un estudiante en el sistema.",
+    "Actores primarios": ["Administrador", "Estudiante"],
+    "Actores secundarios": ["Base de Datos"],
+    "Precondiciones": ["El estudiante debe estar registrado."],
+    "Flujo principal": {
+      "1": "El actor selecciona el perfil del estudiante a actualizar.",
+      "2": "El sistema muestra los datos editables.",
+      "3": "El actor modifica la información (teléfono, correo, CV) y confirma.",
+      "4": "El sistema guarda los cambios actualizados."
+    },
+    "Postcondiciones": ["La información del estudiante es actualizada."]
+  },
+  "CU13": {
+    "Caso de uso": "Consultar estudiante",
+    "Id": "CU-13",
+    "Breve descripción": "Permite visualizar el perfil, datos académicos y estado actual de un estudiante.",
+    "Actores primarios": ["Director", "Administrador", "Supervisor"],
+    "Actores secundarios": ["Base de Datos"],
+    "Precondiciones": ["El estudiante debe existir en el sistema."],
+    "Flujo principal": {
+      "1": "El actor ingresa un criterio de búsqueda (código o nombre).",
+      "2": "El sistema filtra y muestra las coincidencias.",
+      "3": "El actor selecciona al estudiante.",
+      "4": "El sistema despliega el expediente completo del estudiante."
+    },
+    "Postcondiciones": ["Se visualiza la información detallada del estudiante."]
+  },
+  "CU14": {
+    "Caso de uso": "Registrar convenio",
+    "Id": "CU-14",
+    "Breve descripción": "Permite registrar un convenio institucional o marco entre la institución y una empresa.",
+    "Actores primarios": ["Director", "Administrador"],
+    "Actores secundarios": ["Base de Datos"],
+    "Precondiciones": ["La empresa vinculada debe estar registrada en el sistema."],
+    "Flujo principal": {
+      "1": "El actor selecciona la opción de registrar nuevo convenio.",
+      "2": "El sistema solicita los detalles (fecha de inicio, fin, tipo de convenio, documento adjunto).",
+      "3": "El actor asocia la empresa y guarda los datos.",
+      "4": "El sistema almacena el convenio con estado 'Vigente'."
+    },
+    "Postcondiciones": ["El convenio queda registrado e inicia su vigencia."]
+  },
+  "CU15": {
+    "Caso de uso": "Renovar convenio",
+    "Id": "CU-15",
+    "Breve descripción": "Permite extender el periodo de vigencia de un convenio próximo a vencer o vencido.",
+    "Actores primarios": ["Director"],
+    "Actores secundarios": ["Base de Datos"],
+    "Precondiciones": ["El convenio debe estar registrado previamente."],
+    "Flujo principal": {
+      "1": "El director busca el convenio de la empresa específica.",
+      "2": "El sistema muestra la información del convenio actual.",
+      "3": "El director ingresa la nueva fecha de finalización y adjunta la adenda.",
+      "4": "El sistema actualiza el estado y vigencia del convenio."
+    },
+    "Postcondiciones": ["La vigencia del convenio es extendida."]
+  },
+  "CU16": {
+    "Caso de uso": "Registrar vacante",
+    "Id": "CU-16",
+    "Breve descripción": "Permite a una empresa crear una oferta de pasantía con requerimientos específicos.",
+    "Actores primarios": ["Empresa"],
+    "Actores secundarios": ["Base de Datos"],
+    "Precondiciones": ["La empresa debe tener un convenio vigente activo."],
+    "Flujo principal": {
+      "1": "La empresa selecciona la opción de crear vacante.",
+      "2": "El sistema solicita título, descripción, funciones, requisitos y número de plazas.",
+      "3": "La empresa completa el formulario y lo envía.",
+      "4": "El sistema guarda la vacante en estado 'Pendiente de aprobación'."
+    },
+    "Postcondiciones": ["La vacante queda registrada a la espera de ser publicada."]
+  },
+  "CU17": {
+    "Caso de uso": "Actualizar vacante",
+    "Id": "CU-17",
+    "Breve descripción": "Permite modificar los detalles de una vacante registrada que aún no ha cerrado.",
+    "Actores primarios": ["Empresa"],
+    "Actores secundarios": ["Base de Datos"],
+    "Precondiciones": ["La vacante debe pertenecer a la empresa y estar abierta."],
+    "Flujo principal": {
+      "1": "La empresa selecciona una de sus vacantes activas.",
+      "2": "El sistema habilita la edición de los campos.",
+      "3": "La empresa modifica las especificaciones y guarda.",
+      "4": "El sistema actualiza la oferta."
+    },
+    "Postcondiciones": ["Los requisitos u oferta de la vacante se modifican."]
+  },
+  "CU18": {
+    "Caso de uso": "Publicar vacante",
+    "Id": "CU-18",
+    "Breve descripción": "Permite hacer visible una vacante para que los estudiantes puedan postular.",
+    "Actores primarios": ["Administrador", "Director"],
+    "Actores secundarios": ["Base de Datos"],
+    "Precondiciones": ["La vacante debe haber sido registrada previamente."],
+    "Flujo principal": {
+      "1": "El actor revisa la lista de vacantes pendientes de aprobación.",
+      "2": "El sistema muestra el detalle de la solicitud de la empresa.",
+      "3": "El actor aprueba y selecciona la opción 'Publicar'.",
+      "4": "El sistema cambia el estado a 'Publicada' y la hace visible a los alumnos."
+    },
+    "Postcondiciones": ["La vacante es visible en el portal de los estudiantes."]
+  },
+  "CU19": {
+    "Caso de uso": "Postular a vacante",
+    "Id": "CU-19",
+    "Breve descripción": "Permite a un estudiante enviar su postulación a una oferta publicada.",
+    "Actores primarios": ["Estudiante"],
+    "Actores secundarios": ["Base de Datos"],
+    "Precondiciones": ["El estudiante debe estar habilitado y la vacante en estado 'Publicada'."],
+    "Flujo principal": {
+      "1": "El estudiante busca y selecciona una vacante de su interés.",
+      "2": "El sistema muestra los detalles y el botón de postulación.",
+      "3": "El estudiante confirma el envío de su CV.",
+      "4": "El sistema registra la postulación enlazando al alumno con la vacante."
+    },
+    "Postcondiciones": ["La postulación es enviada exitosamente a la empresa."]
+  },
+  "CU20": {
+    "Caso de uso": "Aprobar postulación",
+    "Id": "CU-20",
+    "Breve descripción": "Permite aceptar la postulación de un estudiante para iniciar su pasantía.",
+    "Actores primarios": ["Empresa", "Director"],
+    "Actores secundarios": ["Base de Datos"],
+    "Precondiciones": ["Debe existir una postulación activa por parte del estudiante."],
+    "Flujo principal": {
+      "1": "La empresa evalúa al candidato y marca la opción 'Aprobar'.",
+      "2": "El sistema notifica al director para el visado final.",
+      "3": "El director valida el cumplimiento y aprueba.",
+      "4": "El sistema actualiza el estado de la postulación a 'Aprobada'."
+    },
+    "Postcondiciones": ["El estudiante es seleccionado formalmente para ocupar la vacante."]
+  },
+  "CU21": {
+    "Caso de uso": "Rechazar postulación",
+    "Id": "CU-21",
+    "Breve descripción": "Permite descartar la postulación de un estudiante a una vacante determinada.",
+    "Actores primarios": ["Empresa"],
+    "Actores secundarios": ["Base de Datos"],
+    "Precondiciones": ["Debe existir una postulación activa."],
+    "Flujo principal": {
+      "1": "La empresa selecciona al postulante no seleccionado.",
+      "2": "La empresa marca la opción 'Rechazar' e ingresa un motivo (opcional).",
+      "3": "El sistema cambia el estado a 'Rechazada'.",
+      "4": "El sistema notifica automáticamente al estudiante."
+    },
+    "Postcondiciones": ["La postulación queda cerrada como no seleccionada."]
+  },
+  "CU22": {
+    "Caso de uso": "Generar reportes",
+    "Id": "CU-22",
+    "Breve descripción": "Permite exportar estadísticas y reportes consolidados sobre el estado de las pasantías.",
+    "Actores primarios": ["Director", "Administrador"],
+    "Actores secundarios": ["Base de Datos"],
+    "Precondiciones": ["El usuario debe tener acceso al módulo de analítica."],
+    "Flujo principal": {
+      "1": "El actor selecciona el tipo de reporte (estudiantes contratados, convenios por vencer, etc.).",
+      "2": "El sistema solicita los filtros de fecha o sede.",
+      "3": "El sistema procesa la consulta y genera el archivo (PDF/Excel).",
+      "4": "El sistema descarga el archivo generado."
+    },
+    "Postcondiciones": ["Se obtiene el documento del reporte solicitado."]
+  },
+  "CU23": {
+    "Caso de uso": "Consultar historial",
+    "Id": "CU-23",
+    "Breve descripción": "Permite auditar y revisar los registros históricos de actividades, convenios pasados o pasantías concluidas.",
+    "Actores primarios": ["Director", "Administrador"],
+    "Actores secundarios": ["Base de Datos"],
+    "Precondiciones": ["Acceso al sistema concedido."],
+    "Flujo principal": {
+      "1": "El actor accede al módulo de historial.",
+      "2": "El sistema despliega herramientas de búsqueda por periodos académicos anteriores.",
+      "3": "El actor ingresa los parámetros y consulta.",
+      "4": "El sistema lista cronológicamente todos los registros históricos asociados."
+    },
+    "Postcondiciones": ["Se muestra la información de auditoría o histórica requerida."]
+  },
+  "CU24": {
+    "Caso de uso": "Asignar supervisor",
+    "Id": "CU-24",
+    "Breve descripción": "Permite designar a un docente supervisor para que acompañe el desarrollo de la pasantía del alumno.",
+    "Actores primarios": ["Director"],
+    "Actores secundarios": ["Base de Datos"],
+    "Precondiciones": ["El estudiante debe tener una pasantía aprobada e iniciada."],
+    "Flujo principal": {
+      "1": "El director ve la lista de estudiantes sin supervisor asignado.",
+      "2": "El sistema muestra la lista de docentes disponibles.",
+      "3": "El director vincula un docente supervisor al estudiante.",
+      "4": "El sistema guarda la asignación y notifica a ambas partes."
+    },
+    "Postcondiciones": ["El estudiante cuenta con un supervisor asignado para su monitoreo."]
+  },
+  "CU25": {
+    "Caso de uso": "Registrar seguimiento",
+    "Id": "CU-25",
+    "Breve descripción": "Permite asentar bitácoras, visitas o informes periódicos sobre el avance del pasante.",
+    "Actores primarios": ["Supervisor"],
+    "Actores secundarios": ["Base de Datos"],
+    "Precondiciones": ["El supervisor debe tener asignado al alumno."],
+    "Flujo principal": {
+      "1": "El supervisor ingresa al registro de seguimiento del estudiante.",
+      "2": "El sistema presenta un formulario de evaluación periódica.",
+      "3": "El supervisor anota observaciones, horas acumuladas y conclusiones de la visita.",
+      "4": "El sistema guarda la ficha de seguimiento."
+    },
+    "Postcondiciones": ["Se añade una nueva bitácora de seguimiento al expediente de la pasantía."]
+  },
+  "CU26": {
+    "Caso de uso": "Evaluar desempeño",
+    "Id": "CU-26",
+    "Breve descripción": "Permite calificar el rendimiento del estudiante al término de sus actividades prácticas.",
+    "Actores primarios": ["Empresa", "Supervisor"],
+    "Actores secundarios": ["Base de Datos"],
+    "Precondiciones": ["La pasantía debe estar en su etapa final o concluida."],
+    "Flujo principal": {
+      "1": "El actor accede a la evaluación final del pasante.",
+      "2": "El sistema muestra los criterios de evaluación establecidos.",
+      "3": "El actor asigna puntajes, comentarios de desempeño y envía.",
+      "4": "El sistema calcula el promedio y archiva la calificación."
+    },
+    "Postcondiciones": ["El estudiante queda evaluado formalmente por sus actividades."]
+  },
+  "CU27": {
+    "Caso de uso": "Emitir constancia",
+    "Id": "CU-27",
+    "Breve descripción": "Permite generar el documento oficial que certifica la culminación satisfactoria de la pasantía.",
+    "Actores primarios": ["Director", "Administrador"],
+    "Actores secundarios": ["Base de Datos"],
+    "Precondiciones": ["El estudiante debe haber cumplido con las horas requeridas y tener aprobadas las evaluaciones."],
+    "Flujo principal": {
+      "1": "El actor selecciona al estudiante apto para certificación.",
+      "2": "El sistema valida de forma automática el cumplimiento de requisitos.",
+      "3": "El sistema genera una constancia digital firmada o con código de verificación QR.",
+      "4": "El sistema habilita la descarga de la constancia al alumno."
+    },
+    "Postcondiciones": ["La constancia de pasantía es emitida y puesta a disposición."]
+  },
+  "CU28": {
+    "Caso de uso": "Cerrar proceso",
+    "Id": "CU-28",
+    "Breve descripción": "Permite dar por concluido de manera definitiva el ciclo de la pasantía de un estudiante.",
+    "Actores primarios": ["Director"],
+    "Actores secundarios": ["Base de Datos"],
+    "Precondiciones": ["La constancia debió ser emitida y todos los documentos archivados."],
+    "Flujo principal": {
+      "1": "El director busca el expediente del estudiante en fase final.",
+      "2": "El sistema muestra un checklist con todas las fases completas.",
+      "3": "El director presiona 'Cerrar Proceso'.",
+      "4": "El sistema cambia el estado del expediente a 'Archivado / Concluido'."
+    },
+    "Postcondiciones": ["El expediente pasa al archivo histórico del sistema, liberando al alumno del proceso activo."]
+  }
+}
+@endjson
